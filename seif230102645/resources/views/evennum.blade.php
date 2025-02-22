@@ -8,15 +8,15 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 
-    <title>Event Number</title>
+    <title>Prime Numbers</title>
 </head>
 
 <body>
     <div class="card m-3">
-        <div class="card-header">Even Numbers</div>
+        <div class="card-header">Prime Numbers</div>
         <div class="card-body">
             @foreach (range(1, 100) as $i)
-                @if ($i % 2 == 0)
+                @if (is_prime($i))
                     <span class="badge" style="background-color: green">{{ $i }}</span>
                 @else
                     <span class="badge" style="background-color: red">{{ $i }}</span>

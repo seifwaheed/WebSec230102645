@@ -13,10 +13,10 @@
 
 <body>
     <div class="card m-3">
-        <div class="card-header">Prime Numbers</div>
+        <div class="card-header">Even & Odd </div>
         <div class="card-body">
             @foreach (range(1, 100) as $i)
-                @if (is_prime($i))
+                @if ($i % 2 == 0)
                     <span class="badge" style="background-color: green">{{ $i }}</span>
                 @else
                     <span class="badge" style="background-color: red">{{ $i }}</span>

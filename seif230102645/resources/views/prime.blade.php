@@ -11,6 +11,7 @@
     <div class='card-header'>Prime Numbers</div>
     <div class="card=body">
         @foreach (range(1, 100) as i)
+        
     </div>
 </div>
 

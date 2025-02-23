@@ -27,3 +27,17 @@ Route::get('/minitest', function () {
 
     return view('minitest', ['bill' => $bill]);
 });
+Route::get('/transcript', function () {
+    $student = [
+        'name' => 'John Doe',
+        'id' => '12345',
+    ];
+
+    $courses = [
+        ['name' => 'Cybersecurity', 'grade' => 'A'],
+        ['name' => 'Network Administration', 'grade' => 'B+'],
+        ['name' => 'Web Development', 'grade' => 'A-'],
+    ];
+
+    return view('transcript', compact('student', 'courses'));
+});

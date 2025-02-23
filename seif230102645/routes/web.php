@@ -17,3 +17,13 @@ Route::get('/multiplication', function () {
 Route::get('/prime', function () {
     return view('prime');
 })->name('prime');
+
+Route::get('/minitest', function () {
+    $bill = [
+        ['item' => 'Apple', 'quantity' => 3, 'price' => 2],
+        ['item' => 'Milk', 'quantity' => 1, 'price' => 5],
+        ['item' => 'Bread', 'quantity' => 2, 'price' => 3],
+    ];
+
+    return view('minitest', ['bill' => $bill]);
+});

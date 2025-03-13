@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TestController;
+use App\Http\Controllers\PostController;
 
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/test',[TestController::class,'testAction']);
+Route::get('/posts',[PostController::class,'index']);

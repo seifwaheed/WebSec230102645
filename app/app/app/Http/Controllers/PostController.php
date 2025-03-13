@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class TestController extends Controller
+class PostController extends Controller
     {
-    public function testAction(){
+    public function index(){
 
         $allPosts = [
             ['id' => 1 ,'Title' => 'php' ,'Posted By' => 'seif' , 'Created At' => '9:00'],
@@ -16,6 +16,6 @@ class TestController extends Controller
         ];
 
 
-        return view("test",['posts' => $allPosts]);
+        return view("posts",['posts' => $allPosts]);
 }
     }

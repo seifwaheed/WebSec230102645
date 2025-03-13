@@ -4,17 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class TestController extends Controller //StudlyCase
-{
-    public function firstAction()//camelCase
+class TestController extends Controller
     {
-        $localname = 'seif waheed ';
-        $books = ['phhp', 'java', 'javascript', 'python'];
-        return view('test',['name'=>$localname, "age"=>"555" , "books"=>$books]);
-
-    }
-    public function gread ()
-    {
-        return "hello world";
-    }
+    public function firstAction(){
+        return 'we are here mother father the world arent goning to be the same again ';
 }
+    }

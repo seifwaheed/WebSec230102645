@@ -23,7 +23,10 @@ class PostController extends Controller
 
     public function show($postID)
     {
-        $card = [['name' => ' cradnumber 1 '], ['name' => ' cradnumber 2 '], ['name' => ' cradnumber 3 '], ['name' => ' cradnumber 4 ']];
+        $card = [['name' => ' VA 1 ' , "DESCRIPTION" => "ICECREAM" ],
+                 ['name' => ' cradnumber 2 ', "DESCRIPTION" => "ICECREAM"],
+                 ['name' => ' cradnumber 3 ', "DESCRIPTION" => "ICECREAM"],
+                 ['name' => ' cradnumber 4 ', "DESCRIPTION" => "ICECREAM"]];
 
         return view('posts.show', ['cards' => $card]);
     }

@@ -29,15 +29,22 @@
                         <td>{{ $post['postCreator'] }}</td>
                         <td>{{ $post['Created_At'] }}</td>
                         <td>
+
                             <a href="{{ route('posts.show', $post['id']) }}">
                                 <button herh type="button" class="btn btn-info">View</button>
                             </a>
 
                             <a href="{{ route('posts.edit', $post['id']) }}">
-                            <button type="button" class="btn btn-warning">Edit</button>
+                                <button type="button" class="btn btn-warning">Edit</button>
                             </a>
 
-                            <button type="button" class="btn btn-danger">Delete</button>
+                            <form method="POST" action="{{ route('posts.destroy', $post['id']) }}">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger">
+                                    Delete
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

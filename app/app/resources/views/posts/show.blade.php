@@ -3,25 +3,27 @@
     show
 @endsection
 @section('show')
-    @foreach ($cards as $card)
+    @foreach ($singlepost as $post)
         <div class="card" style="width: 18rem;">
             <img src= {{ asset('images/images.jpg') }} class="card-img-top" alt="HI">
             <div class="card-body">
 
                 <h5 class="card-title">
-                    {{ $card['id'] }}
+                    {{ $post['id'] }}
                 </h5>
                 
                 <p class="card-text">
-                   name: {{ $card['Title'] }}
+                   name: {{ $post['Title'] }}
                 </p>
                 <p class="card-text">
-                    posted by: {{ $card['postCreator'] }} AT -> {{ $card['Created At'] }}
+                    posted by: {{ $post['postCreator'] }} AT -> {{ $post['Created_At'] }}
                 </p>
                 
+                
                 <p class="card-text">
-                    posted by: {{ $card['description'] }} 
+                    Description: {{ $post['description'] }} 
                 </p>
+                
 
                 <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>

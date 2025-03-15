@@ -16,11 +16,11 @@
                    name: {{ $card['Title'] }}
                 </p>
                 <p class="card-text">
-                    posted by: {{ $card['Posted By'] }} AT -> {{ $card['Created At'] }}
+                    posted by: {{ $card['postCreator'] }} AT -> {{ $card['Created At'] }}
                 </p>
                 
                 <p class="card-text">
-                    posted by: {{ $card['discreption'] }} 
+                    posted by: {{ $card['description'] }} 
                 </p>
 
                 <a href="#" class="btn btn-primary">Go somewhere</a>

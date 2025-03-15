@@ -26,13 +26,17 @@
                     <tr>
                         <th>{{ $post['id'] }}</th>
                         <td>{{ $post['Title'] }}</td>
-                        <td>{{ $post['posted_creator'] }}</td>
+                        <td>{{ $post['postCreator'] }}</td>
                         <td>{{ $post['Created_At'] }}</td>
                         <td>
                             <a href="{{ route('posts.show', $post['id']) }}">
                                 <button herh type="button" class="btn btn-info">View</button>
                             </a>
+
+                            <a href="{{ route('posts.edit', $post['id']) }}">
                             <button type="button" class="btn btn-warning">Edit</button>
+                            </a>
+
                             <button type="button" class="btn btn-danger">Delete</button>
                         </td>
                     </tr>

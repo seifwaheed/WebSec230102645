@@ -23,6 +23,16 @@
             <label>Confirm Password</label>
             <input type="password" name="password_confirmation" class="form-control" required>
         </div>
+
+
+        <div class="mb-3">
+            <label>age</label>
+            <input type="age" name="age" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label>major</label>
+            <input type="major" name="major" class="form-control" required>
+        </div>
         <button type="submit" class="btn btn-primary">Register</button>
     </form>
 </div>

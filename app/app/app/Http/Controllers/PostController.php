@@ -3,75 +3,82 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Post;
 
 class PostController extends Controller
 {
     public function index()
     {
+        $postsFromDB = Post::all();
 
-        $allPosts = [
-            ['id' => 1, 'Title' => 'php', 'postCreator' => 'seif', 'Created_At' => '9:00'],
-            ['id' => 2, 'Title' => 'puthon', 'postCreator' => 'ahmed', 'Created_At' => '9:00'],
-            ['id' => 3, 'Title' => 'java', 'postCreator' => 'mohamed', 'Created_At' => '9:00'],
-            ['id' => 4, 'Title' => 'php', 'postCreator' => 'essam', 'Created_At' => '9:00']
-        ];
-
-
-        return view("posts.index", ['posts' => $allPosts]);
+        return view("posts.index", ['posts' => $postsFromDB]);
     }
-
-
-    public function show($postID)
+    public function show(Post $post)
     {
-        $singlepost = [
-            ['id' => 1, 'Title' => 'php', 'description' => 'that is the best programming lan', 'postCreator' => 'seif', 'Created_At' => '9:00'],
-            ['id' => 2, 'Title' => 'python', 'description' => 'that is the best programming lan', 'postCreator' => 'ahmed', 'Created_At' => '9:00'],
-            ['id' => 3, 'Title' => 'java', 'description' => 'that is the best programming lan', 'postCreator' => 'mohamed', 'Created_At' => '9:00'],
-            ['id' => 4, 'Title' => 'php', 'description' => 'that is the best programming lan', 'postCreator' => 'essam', 'Created_At' => '9:00']
-        ];
-
-        $post = collect($singlepost)->firstwhere('id', $postID);
-
-        if (!$post) {
-            abort(404); // Return 404 if post is not found
-        }
 
         return view('posts.show', ['singlepost' => [$post]]);
     }
-
     public function create()
     {
-        return view('posts.create');
+        $users = User::all();
+
+
+
+        return view('posts.create', ["users" => $users]);
     }
 
     public function store()
     {
-        $Title = request()->Title;
+        $data = request()->all();
+
+        $title = request()->title;
         $description = request()->description;
         $postCreator = request()->postCreator;
 
+
+        $post = new Post;
+
+        $post->title = $title;
+        $post->description = $description;
+
+        $post->save();
 
         return to_route('posts.index');
 
     }
 
-    public function edit()
+    public function edit(Post $post)
     {
-        return view('posts.edit');
+        $users = User::all();
+
+        return view('posts.edit', ["users" => $users, "post" => $post]);
     }
 
-    public function update()
+    public function update($postID)
     {
-        $Title = request()->Title;
+        $title = request()->Title;
         $description = request()->description;
         $postCreator = request()->postCreator;
+
         // dd($Title, $description, $postCreator);
 
-        return to_route('posts.show', 1);
+        $singlePostFromDB = Post::findOrFail($postID);
+        $singlePostFromDB->update([
+            'title' => $title,
+            'description' => $description,
+        ]);
+
+
+        return to_route('posts.show', $postID);
 
     }
-    public function destroy()
+    public function destroy($postid)
     {
+
+        $post = Post::findOrFail($postid);
+        $post->delete();
+
         return to_route('posts.index');
     }
 }

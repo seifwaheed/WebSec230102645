@@ -22,19 +22,20 @@
                 </tr>
             </thead>
             <tbody>
+
                 @foreach ($posts as $post)
                     <tr>
-                        <th>{{ $post['id'] }}</th>
-                        <td>{{ $post['Title'] }}</td>
-                        <td>{{ $post['postCreator'] }}</td>
-                        <td>{{ $post['Created_At'] }}</td>
+                        <th>{{ $post->id }} </th>
+                        <td>{{ $post->title }} </td>
+                        <td>{{ $post->postCreator }} </td>
+                        <td>{{ $post->created_at }} </td>
                         <td>
 
-                            <a href="{{ route('posts.show', $post['id']) }}">
+                            <a href="{{ route('posts.show', $post->id) }}">
                                 <button herh type="button" class="btn btn-info">View</button>
                             </a>
 
-                            <a href="{{ route('posts.edit', $post['id']) }}">
+                            <a href="{{ route('posts.edit', $post->id) }}">
                                 <button type="button" class="btn btn-warning">Edit</button>
                             </a>
 

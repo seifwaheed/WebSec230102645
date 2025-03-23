@@ -16,6 +16,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 @auth
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.index') }}">Admin Panel</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('transcript') }}">Transcript</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('mini_test') }}">Lab Ex 2_1</a></li>
                     <li class="nav-item"><a class="nav-link">{{ auth()->user()->name }}</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('do_logout') }}">Logout</a></li>

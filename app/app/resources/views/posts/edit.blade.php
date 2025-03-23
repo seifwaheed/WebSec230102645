@@ -17,13 +17,14 @@
                 <label class="form-label">Description</label>
                 <textarea name="description" class="form-control" rows="3">{{ $post->description }}</textarea>
             </div>
-            
+
             <div class="mb-3">
                 <label class="form-label">Post Creator</label>
                 <select name="postCreator" class="form-control">
                     @foreach ($users as $user)
-                        <option value="{{ $user->id }}" {{ $post->postCreator == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
-                    @endforeach 
+                        <option value="{{ $user->id }}" {{ $post->postCreator == $user->id ? 'selected' : '' }}>
+                            {{ $user->name }}</option>
+                    @endforeach
                 </select>
             </div>
             <button class="btn btn-success">Update</button>

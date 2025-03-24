@@ -16,7 +16,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Title</th>
-                    <th scope="col">Posted By</th>
+                    <th scope="col">Description</th>
                     <th scope="col">Created At</th>
                     <th scope="col">Actions</th>
                 </tr>
@@ -27,7 +27,7 @@
                     <tr>
                         <th>{{ $post->id }} </th>
                         <td>{{ $post->title }} </td>
-                        <td>{{ $post->postCreator }} </td>
+                        <td>{{ $post->description }} </td>
                         <td>{{ $post->created_at }} </td>
                         <td>
 
@@ -35,17 +35,19 @@
                                 <button herh type="button" class="btn btn-info">View</button>
                             </a>
 
-                            <a href="{{ route('posts.edit', $post->id) }}">
-                                <button type="button" class="btn btn-warning">Edit</button>
-                            </a>
-
-                            <form method="POST" action="{{ route('posts.destroy', $post['id']) }}">
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="btn btn-danger">
-                                    Delete
-                                </button>
-                            </form>
+                            
+                            @if(Auth::user()->isAdmin())
+                                    <a href="{{ route('posts.edit', $post->id) }}">
+                                        <button type="button" class="btn btn-warning">Edit</button>
+                                    </a>
+                                <form method="POST" action="{{ route('posts.destroy', $post['id']) }}">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-danger">
+                                        Delete
+                                    </button>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

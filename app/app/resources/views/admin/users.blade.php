@@ -1,17 +1,17 @@
 @extends('layouts.app')
-@section('Title') users
 
-@endsection
+@section('title', 'Users')
+
 @section('content')
 <div class="container">
-    <h2>All Users</h2>
-    <table class="table">
-        <thead>
+    <h2 class="text-center mb-4">All Users</h2>
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
             <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Actions</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Role</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -19,9 +19,15 @@
                 <tr>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ $user->isAdmin() ? 'Admin' : 'User' }}</td>
                     <td>
-                        <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-sm btn-warning">Edit</a>
+                        <span class="badge {{ $user->isAdmin() ? 'bg-success' : 'bg-primary' }}">
+                            {{ $user->isAdmin() ? 'Admin' : 'User' }}
+                        </span>
+                    </td>
+                    <td>
+                        <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-sm btn-warning">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
                     </td>
                 </tr>
             @endforeach

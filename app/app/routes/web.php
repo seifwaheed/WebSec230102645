@@ -1,11 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Web\UsersController;
 use App\Http\Controllers\ProfileController;
-
-
 
 Auth::routes(); // This will enable login, register, and logout routes
 
@@ -19,12 +18,17 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/users', [AdminController::class, 'index'])->name('admin.users.index');
+    Route::get('/admin/users/{user}/edit', [AdminController::class, 'edit'])->name('admin.users.edit');
+    Route::post('/admin/users/{user}/update-password', [AdminController::class, 'updatePassword'])->name('admin.users.update-password');
+});
+
 Route::get('register', [UsersController::class, 'register'])->name('register');
 Route::post('register', [UsersController::class, 'doRegister'])->name('do_register');
 Route::get('login', [UsersController::class, 'login'])->name('login');
 Route::post('login', [UsersController::class, 'doLogin'])->name('do_login');
-Route::post('logout', [UsersController::class, 'doLogout'])->name('logout'); // Ensure this route is defined
-
+Route::post('logout', [UsersController::class, 'doLogout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');

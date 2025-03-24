@@ -35,6 +35,15 @@
             <input type="password" class="form-control" name="password_confirmation" required>
         </div>
 
+        @if(Auth::check() && Auth::user()->isAdmin())
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="admin" id="admin">
+                <label class="form-check-label" for="admin">
+                    Set as Admin
+                </label>
+            </div>
+        @endif
+
         <button type="submit" class="btn btn-primary">Register</button>
     </form>
 </div>

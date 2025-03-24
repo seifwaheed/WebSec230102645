@@ -30,6 +30,7 @@ class UsersController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'age' => $request->age,
+            'admin' => isset($data['admin']) ? true : false, // Admin checkbox
         ]);
 
         return redirect()->route('login')->with('success', 'Registration successful, please login.');

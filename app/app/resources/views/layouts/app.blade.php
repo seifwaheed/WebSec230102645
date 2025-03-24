@@ -29,6 +29,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('posts.index') }}">All Posts</a>
                         </li>
+                        @if(Auth::user()->isAdmin())
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.users.index') }}">Manage Users</a>
+                            </li>
+                        @endif
                         <li class="nav-item">
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf

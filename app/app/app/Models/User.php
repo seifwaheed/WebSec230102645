@@ -22,7 +22,8 @@ class User extends Authenticatable
         'email',
         'password',
         'age',
-        'major'
+        'major',
+        'admin', // Add admin to fillable attributes
     ];
 
     /**
@@ -45,6 +46,13 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'admin' => 'boolean',
         ];
     }
+
+    public function isAdmin()
+    {
+        return $this->admin == 1; // Check the admin attribute
+    }
+
 }

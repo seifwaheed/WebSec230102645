@@ -18,8 +18,10 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
-            'age' => 25, // Add age field
-            'major' => 'Computer Science', // Add major field
+            'password' => Hash::make('password'),
+            'age' => 25,
+            'major' => 'Computer Science',
+            'admin' => 0, // Set admin to 0 for regular user
         ]);
 
         // Create an admin user
@@ -27,9 +29,9 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin User',
             'email' => 'admin@example.com',
             'password' => Hash::make('password'),
-            'role' => 'admin',
-            'age' => 30, // Add age field
-            'major' => 'Information Technology', // Add major field
+            'age' => 30,
+            'major' => 'Information Technology',
+            'admin' => true, // Set admin to 1 for admin user
         ]);
     }
 }

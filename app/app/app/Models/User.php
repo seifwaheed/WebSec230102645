@@ -24,6 +24,8 @@ class User extends Authenticatable
         'age',
         'major',
         'admin', // Add admin to fillable attributes
+        'credit', // Add credit to fillable attributes
+        'role', // Add role to fillable attributes
     ];
 
     /**
@@ -47,6 +49,7 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'admin' => 'boolean',
+            'credit' => 'decimal:2',
         ];
     }
 
@@ -54,5 +57,19 @@ class User extends Authenticatable
     {
         return $this->admin == 1; // Check the admin attribute
     }
+
+    public function isCustomer()
+    {
+        return $this->role === 'customer';
+    }
+
+    public function isEmployee()
+    {
+        return $this->role === 'employee';
+    }
+    public function purchases()
+{
+    return $this->hasMany(Purchase::class);
+}
 
 }

@@ -17,11 +17,5 @@ Route::get('/calculator', [CalculatorController::class, 'index']);
 Route::get('/gpa-simulator', [CalculatorController::class, 'gpaSimulator']);
 
 
-// Users CRUD
 Route::resource('users', UserController::class);
-
-// Grades CRUD
-Route::resource('grades', GradeController::class);
-
-// MCQ Exam
-Route::resource('questions', QuestionController::class);
+Route::resource('products', ProductController::class);

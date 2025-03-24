@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('Title')
-    Post Details
+    Post Detailss
 @endsection
 @section('show')
     <div class="row justify-content-center">

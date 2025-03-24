@@ -20,12 +20,14 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('posts.index') }}">All Posts</a>
-                    </li>
                     @auth
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('books.index') }}">All Books</a>
+                            <a class="nav-link" href="{{ route('profile.show') }}">
+                                {{ Auth::user()->name }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('posts.index') }}">All Posts</a>
                         </li>
                         <li class="nav-item">
                             <form method="POST" action="{{ route('logout') }}">
@@ -36,7 +38,12 @@
                             </form>
                         </li>
                     @else
-                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">Login</a>
+                        </li>
                     @endauth
                 </ul>
             </div>

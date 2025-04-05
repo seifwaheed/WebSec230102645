@@ -18,10 +18,24 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'name', 'email', 'password', 'role', 'credit'
     ];
+
+    public function isAdmin()
+    {
+        return $this->role === 'Admin';
+    }
+
+    public function isEmployee()
+    {
+        return $this->role === 'Employee';
+    }
+
+    public function isCustomer()
+    {
+        return $this->role === 'Customer';
+    }
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -45,4 +59,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function purchases()
+    {
+        return $this->belongsToMany(Product::class, 'purchases')->withTimestamps();
+    }
+
 }

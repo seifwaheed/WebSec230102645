@@ -7,102 +7,12 @@
     <title>@yield('Title')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #3a86ff;
-            --secondary-color: #8338ec;
-            --light-bg: #f8f9fa;
-            --dark-text: #343a40;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: var(--dark-text);
-            background-color: #f5f7fa;
-        }
-        
-        .navbar {
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            background-color: white !important;
-            padding: 0.8rem 1rem;
-        }
-        
-        .navbar-brand {
-            font-weight: 700;
-            color: var(--primary-color);
-            font-size: 1.4rem;
-        }
-        
-        .nav-link {
-            font-weight: 500;
-            color: var(--dark-text);
-            margin: 0 0.3rem;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-link:hover {
-            color: var(--primary-color);
-            transform: translateY(-2px);
-        }
-        
-        .btn-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-        
-        .btn-primary:hover {
-            background-color: var(--secondary-color);
-            border-color: var(--secondary-color);
-        }
-        
-        .container {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            padding: 2rem;
-            margin-top: 2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .footer {
-            background-color: var(--light-bg);
-            padding: 1.5rem 0;
-            text-align: center;
-            margin-top: 3rem;
-        }
-        
-        .user-avatar {
-            height: 30px;
-            width: 30px;
-            border-radius: 50%;
-            margin-right: 8px;
-        }
-        
-        .active-nav-link {
-            color: var(--primary-color) !important;
-            font-weight: 600;
-        }
-        
-        .card {
-            border: none;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-        }
-    </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg sticky-top">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <i class="fas fa-laptop-code me-2"></i>Welcome
-            </a>
+            <a class="navbar-brand" href="#">Welcome</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -120,6 +30,16 @@
                         <li class="nav-item">
                             <a class="nav-link d-flex align-items-center" href="{{ route('posts.index') }}">
                                 <i class="fas fa-clipboard-list me-1"></i> All Posts
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center" href="{{ route('products.index') }}">
+                                <i class="fas fa-boxes me-1"></i> All Products
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center" href="{{ route('purchases.index') }}">
+                                <i class="fas fa-shopping-cart me-1"></i> My Purchases
                             </a>
                         </li>
                         @if(Auth::user()->isAdmin())

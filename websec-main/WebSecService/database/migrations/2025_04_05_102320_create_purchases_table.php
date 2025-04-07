@@ -9,14 +9,14 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('grades', function (Blueprint $table) {
+        Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('course_id')->constrained();
-            $table->string('term');
-            $table->decimal('grade', 3, 2);
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
+            $table->integer('quantity');
+            $table->decimal('total_price', 10, 2);
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('grades');
+        Schema::dropIfExists('purchases');
     }
 };

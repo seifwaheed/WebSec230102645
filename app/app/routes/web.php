@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\Web\UsersController;
 use App\Http\Controllers\ProfileController;
 
@@ -22,6 +24,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/users', [AdminController::class, 'index'])->name('admin.users.index');
     Route::get('/admin/users/{user}/edit', [AdminController::class, 'edit'])->name('admin.users.edit');
     Route::post('/admin/users/{user}/update-password', [AdminController::class, 'updatePassword'])->name('admin.users.update-password');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('products', ProductController::class);
+    Route::post('/products/{product}/purchase', [PurchaseController::class, 'purchase'])->name('products.purchase');
+    Route::get('/purchases', [PurchaseController::class, 'listPurchases'])->name('purchases.index');
 });
 
 Route::get('register', [UsersController::class, 'register'])->name('register');

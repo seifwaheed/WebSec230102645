@@ -19,6 +19,8 @@ Route::get('users/edit_password/{user?}', [UsersController::class, 'editPassword
 Route::post('users/save_password/{user}', [UsersController::class, 'savePassword'])->name('save_password');
 
 Route::get('/customers', [UsersController::class, 'customers'])->name('customers.index');
+
+Route::post('/purchasess', [PurchasesController::class, 'refund'])->name('purchases.refund');
 Route::post('/purchases', [PurchasesController::class, 'store'])->name('purchases.store');
 Route::get('/purchases', [PurchasesController::class, 'index'])->name('purchases.index');
 Route::get('products', [ProductsController::class, 'list'])->name('products_list');

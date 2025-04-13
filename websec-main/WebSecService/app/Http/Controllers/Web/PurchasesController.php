@@ -80,4 +80,58 @@ class PurchasesController extends Controller
                 ->with('error', $e->getMessage());
         }
     }
+    public function refund(Request $request)
+    {
+        
+        $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'quantity' => 'required|integer|min:1'
+        ]);
+
+        $product = Product::findOrFail($request->product_id);
+        $user = auth()->user();
+
+        try {
+            DB::beginTransaction();
+
+            
+            // Calculate total price
+            $totalPrice = $product->price * $request->quantity;
+
+            // Check credit
+            if ($user->credit < $totalPrice) {
+                throw new \Exception("Insufficient credit. Needed: {$totalPrice}, Available: {$user->credit}");
+            }
+
+            // Create purchase record
+            Purchase::create([
+                'user_id' => $user->id,
+                'product_id' => $product->id,
+                'quantity' => $request->quantity,
+                'total_price' => $totalPrice
+            ]);
+
+            // Update stock and credit
+            $product->increment('stock', $request->quantity);
+
+
+            $user->increment('credit',$totalPrice);
+
+            // Refresh model data
+            $product->refresh();
+            $user->refresh();
+
+            DB::commit();
+
+            return redirect()->back()
+                ->with('success', "Purchased {$request->quantity} x {$product->name} for $".number_format($totalPrice, 2));
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()
+                ->withInput()
+                ->with('error', $e->getMessage());
+        }
+    }
+    
 }

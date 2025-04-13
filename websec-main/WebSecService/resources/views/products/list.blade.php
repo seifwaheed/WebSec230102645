@@ -104,6 +104,29 @@
                             </form>
                             @endcan
                         </div>
+                        <div class="col col-2">
+                            
+                            <form action="{{ route('purchases.refund') }}" method="POST" class="d-inline">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                <div class="input-group">
+                                    <input type="number" 
+                                           name="quantity" 
+                                           class="form-control form-control-sm" 
+                                           value="1"
+                                           min="1" 
+                                           max="{{ $product->stock }}"
+                                           style="width: 70px"
+                                           {{ $product->stock < 1 ? 'disabled' : '' }}>
+                                    <button type="submit" 
+                                            class="btn btn-sm btn-primary"
+                                            {{ $product->stock < 1 ? 'disabled' : '' }}>
+                                        refund
+                                    </button>
+                                </div>
+                            </form>
+                            
+                        </div>
                     </div>
 
                     <table class="table table-striped">

@@ -62,7 +62,7 @@ class PurchasesController extends Controller
             // Update stock and credit
             $product->decrement('stock', $request->quantity);
 
-            $user->decrement('credit',$totalPrice);
+            $user->decrement('credit', $totalPrice);
 
             // Refresh model data
             $product->refresh();
@@ -71,7 +71,7 @@ class PurchasesController extends Controller
             DB::commit();
 
             return redirect()->back()
-                ->with('success', "Purchased {$request->quantity} x {$product->name} for $".number_format($totalPrice, 2));
+                ->with('success', "Purchased {$request->quantity} x {$product->name} for $" . number_format($totalPrice, 2));
 
         } catch (\Exception $e) {
             DB::rollBack();
@@ -80,58 +80,56 @@ class PurchasesController extends Controller
                 ->with('error', $e->getMessage());
         }
     }
-    public function refund(Request $request)
+
+    public function refund(Request $request) 
     {
-        
         $request->validate([
-            'product_id' => 'required|exists:products,id',
+            'purchase_id' => 'required|exists:purchases,id',
             'quantity' => 'required|integer|min:1'
         ]);
-
-        $product = Product::findOrFail($request->product_id);
+    
+        $purchase = Purchase::findOrFail($request->purchase_id);
+        $product = $purchase->product;
         $user = auth()->user();
-
+    
         try {
             DB::beginTransaction();
-
-            
-            // Calculate total price
-            $totalPrice = $product->price * $request->quantity;
-
-            // Check credit
-            if ($user->credit < $totalPrice) {
-                throw new \Exception("Insufficient credit. Needed: {$totalPrice}, Available: {$user->credit}");
+    
+            if ($request->quantity > $purchase->quantity) {
+                throw new \Exception("Refund quantity exceeds purchased quantity.");
             }
-
-            // Create purchase record
-            Purchase::create([
-                'user_id' => $user->id,
-                'product_id' => $product->id,
-                'quantity' => $request->quantity,
-                'total_price' => $totalPrice
-            ]);
-
-            // Update stock and credit
+    
+            $totalPrice = $product->price * $request->quantity;
+            
+            $user->increment('credit', $totalPrice);
+            
             $product->increment('stock', $request->quantity);
-
-
-            $user->increment('credit',$totalPrice);
-
-            // Refresh model data
+    
+            if ($request->quantity == $purchase->quantity) {
+                $purchase->delete();
+            } else {
+                $purchase->quantity -= $request->quantity;
+                $purchase->total_price -= $totalPrice;
+                $purchase->save();
+            }
+    
             $product->refresh();
             $user->refresh();
-
-            DB::commit();
-
-            return redirect()->back()
-                ->with('success', "Purchased {$request->quantity} x {$product->name} for $".number_format($totalPrice, 2));
-
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()
-                ->withInput()
-                ->with('error', $e->getMessage());
-        }
-    }
     
+            DB::commit();
+            return redirect()->back()
+            ->with('success', "Refunded {$request->quantity} x {$product->name} for $" . number_format($totalPrice, 2));
+    } catch (\Exception $e) {
+        DB::rollBack();
+
+        return redirect()->back()
+            ->withInput()
+            ->with('error', $e->getMessage());
+    }
+}
+
+
+    
+
+
 }

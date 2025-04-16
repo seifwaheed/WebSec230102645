@@ -20,6 +20,8 @@ Route::post('users/save_password/{user}', [UsersController::class, 'savePassword
 
 Route::get('/customers', [UsersController::class, 'customers'])->name('customers.index');
 
+Route::get('verify', [UsersController::class, 'verify'])->name('verify');
+
 Route::post('/purchasess', [PurchasesController::class, 'refund'])->name('purchases.refund');
 Route::post('/purchases', [PurchasesController::class, 'store'])->name('purchases.store');
 Route::get('/purchases', [PurchasesController::class, 'index'])->name('purchases.index');

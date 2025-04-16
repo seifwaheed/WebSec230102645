@@ -28,6 +28,16 @@
                         <td>{{ $purchase->quantity }}</td>
                         <td>${{ number_format($purchase->total_price, 2) }}</td>
                         <td>{{ $purchase->created_at->format('M d, Y') }}</td>
+                        <td>
+                            <form action="{{ route('purchases.refund') }}" method="POST" class="d-inline">
+                                @csrf
+                                <input type="hidden" name="purchase_id" value="{{ $purchase->id }}">
+                                <input type="hidden" name="quantity" value="{{ $purchase->quantity }}">
+                                <button type="submit" class="btn btn-sm btn-primary" {{ $purchase->stock < 1 }}>
+                                    Refund
+                                </button>
+                            </form>
+                        
                     </tr>
                     @endforeach
                 </tbody>
